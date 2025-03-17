@@ -26,7 +26,6 @@ export type AllowedFileMime = (typeof iterableAllowedFileMimes)[number];
 @Entity('attachments')
 export class Attachment {
     @PrimaryGeneratedColumn('uuid')
-    @PrimaryColumn({ type: 'varchar', length: 36 })
     id: string;
 
     @Column({

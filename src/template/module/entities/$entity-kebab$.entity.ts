@@ -11,7 +11,6 @@ import { Update$Entity$Dto } from '../dto/update-$entity-kebab$.dto';
 //@Entity()
 export class $Entity$ {
   @PrimaryGeneratedColumn('uuid')
-  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
 
   @Column({

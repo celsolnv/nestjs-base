@@ -16,7 +16,6 @@ import { Attachment } from 'src/modules/attachments/entities/attachment.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
 
   @Column({

@@ -111,7 +111,7 @@ export class MailService {
 
     const message: Mail.Options = {
       to,
-      from: `Fictional Company <${environmentVariables.SMTP_USER}>`,
+      from: `Rook System <${environmentVariables.SMTP_USER}>`,
       subject,
       html,
     };

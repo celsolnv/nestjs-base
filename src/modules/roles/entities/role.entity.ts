@@ -15,7 +15,6 @@ import { Permission } from './permissions.entity';
 @Entity('roles')
 export class Role {
   @PrimaryGeneratedColumn('uuid')
-  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
 
   @Column({

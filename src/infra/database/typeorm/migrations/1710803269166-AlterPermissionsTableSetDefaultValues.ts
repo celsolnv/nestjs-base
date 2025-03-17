@@ -4,17 +4,16 @@ export class AlterPermissionsTableSetDefaultValues1710803269166 implements Migra
     name = 'AlterPermissionsTableSetDefaultValues1710803269166'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`create\` \`create\` tinyint NULL DEFAULT 0`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`read\` \`read\` tinyint NULL DEFAULT 0`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`update\` \`update\` tinyint NULL DEFAULT 0`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`delete\` \`delete\` tinyint NULL DEFAULT 0`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "create" SET DEFAULT false`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "read" SET DEFAULT false`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "update" SET DEFAULT false`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "delete" SET DEFAULT false`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`delete\` \`delete\` tinyint NOT NULL DEFAULT '0'`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`update\` \`update\` tinyint NOT NULL DEFAULT '0'`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`read\` \`read\` tinyint NOT NULL DEFAULT '0'`);
-        await queryRunner.query(`ALTER TABLE \`permissions\` CHANGE \`create\` \`create\` tinyint NOT NULL DEFAULT '0'`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "delete" SET DEFAULT true`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "update" SET DEFAULT true`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "read" SET DEFAULT true`);
+        await queryRunner.query(`ALTER TABLE "permissions" ALTER COLUMN "create" SET DEFAULT true`);
     }
-
 }

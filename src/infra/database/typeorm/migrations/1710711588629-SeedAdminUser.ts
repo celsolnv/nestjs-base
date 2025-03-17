@@ -29,10 +29,10 @@ export class SeedAdminUser1710711588629 implements MigrationInterface {
             ]
         };
 
-        await queryRunner.query(`INSERT INTO roles (id, name, is_active, notes) VALUES (?, ?, ?, ?)`, [role.id, role.name, role.is_active, role.notes]);
+        await queryRunner.query(`INSERT INTO "roles" (id, name, is_active, notes) VALUES ('${role.id}', '${role.name}', ${role.is_active}, '${role.notes}')`);
+        
         await queryRunner.query(
-            `INSERT INTO permissions (id, name, \`create\`, \`read\`, \`update\`, \`delete\`, roleId) VALUES ${role.permissions.map(permission => `(?, ?, ?, ?, ?, ?, ?)`).join(',')}`,
-            role.permissions.flatMap(permission => [permission.id, permission.name, permission.create, permission.read, permission.update, permission.delete, role.id])
+            `INSERT INTO "permissions" (id, name, "create", "read", "update", "delete", "roleId") VALUES ${role.permissions.map(permission => `('${permission.id}', '${permission.name}', ${permission.create}, ${permission.read}, ${permission.update}, ${permission.delete}, '${role.id}')`).join(',')}`
         );
 
         const user = {
@@ -42,14 +42,13 @@ export class SeedAdminUser1710711588629 implements MigrationInterface {
             password: hashSync('12345678', 10),
             role_id: role.id
         };
-        await queryRunner.query(`INSERT INTO users (id, name, email, password, role_id) VALUES (?, ?, ?, ?, ?)`, [user.id, user.name, user.email, user.password, user.role_id]);
+        
+        await queryRunner.query(`INSERT INTO "users" (id, name, email, password, "role_id") VALUES ('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.role_id}')`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DELETE FROM users WHERE email = 'admin@mail.com'`);
-        await queryRunner.query(`DELETE FROM permissions WHERE name IN ('users', 'roles')`);
-        await queryRunner.query(`DELETE FROM roles WHERE name = 'admin'`);
-
-        await queryRunner.commitTransaction();
+        await queryRunner.query(`DELETE FROM "users" WHERE email = 'admin@mail.com'`);
+        await queryRunner.query(`DELETE FROM "permissions" WHERE name IN ('users', 'roles')`);
+        await queryRunner.query(`DELETE FROM "roles" WHERE name = 'admin'`);
     }
 }

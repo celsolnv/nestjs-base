@@ -1,9 +1,9 @@
 import { environmentVariables } from '../../../config/environment-variables';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 const dbDataSourceOptions: DataSourceOptions = {
-  type: environmentVariables.STORAGE_TYPE as MysqlConnectionOptions['type'],
+  type: environmentVariables.STORAGE_TYPE as PostgresConnectionOptions['type'],
   url: environmentVariables.DATABASE_URL,
   entities: [ './**/*.entity{ .ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
